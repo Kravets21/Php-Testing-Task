@@ -10,18 +10,36 @@
 <?php require_once 'header.php'; ?>
 
 <main>
-   <div class="container">
+    <div class="container">
 
         <div class="block_header">
-            <div class="label_block">List of all films</div>
+            <div class="label_block">Star Search Results</div>
         </div>
 
-        <div class="row films-list">
             <?php
+            $url = $_SERVER['REQUEST_URI'];
+            $parts = parse_url($url);
+            parse_str($parts['query'], $get_arguments);
+            $search = $get_arguments['word'];
+
             $pdo = new PDO('mysql:host=localhost;dbname=webbylab','root');
-            $sql = 'SELECT * FROM `movie` ORDER BY `title`';
+
+            $sql = "SELECT id FROM `star` WHERE `name` LIKE '%$search%'";
             $query = $pdo->prepare($sql);
             $query->execute();
+            $starsIds = $query->fetch(PDO::FETCH_ASSOC);
+            $array = implode("','",$starsIds);
+            $sqlForStars = 'SELECT * 
+                            FROM `movie` 
+                            WHERE `id` IN(
+                            SELECT `movie_id` 
+                            FROM `movie_star` 
+                            WHERE `star_id` IN ('.$array.')
+                            );';
+
+            $query = $pdo->prepare($sqlForStars);
+            $query->execute($starsIds);
+
             while($row = $query->fetch(PDO::FETCH_OBJ)) {
                 echo "
                                 <div class='prev_block'>
@@ -37,15 +55,16 @@
                                 </div>
                             ";
             }
-
-
             ?>
-
-        </div>
-   </div>
+    </div>
 </main>
 
 <?php require_once 'javascript.php'; ?>
 </body>
 
 </html>
+
+
+
+    
+

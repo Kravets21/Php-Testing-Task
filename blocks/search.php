@@ -10,16 +10,21 @@
 <?php require_once 'header.php'; ?>
 
 <main>
-   <div class="container">
+    <div class="container">
 
         <div class="block_header">
-            <div class="label_block">List of all films</div>
+            <div class="label_block">Title Search Results</div>
         </div>
 
-        <div class="row films-list">
             <?php
+            $url = $_SERVER['REQUEST_URI'];
+            $parts = parse_url($url);
+            parse_str($parts['query'], $get_arguments);
+            $search = $get_arguments['word'];
+
             $pdo = new PDO('mysql:host=localhost;dbname=webbylab','root');
-            $sql = 'SELECT * FROM `movie` ORDER BY `title`';
+
+            $sql = "SELECT * FROM `movie` WHERE `title` LIKE '%$search%'";
             $query = $pdo->prepare($sql);
             $query->execute();
             while($row = $query->fetch(PDO::FETCH_OBJ)) {
@@ -37,15 +42,16 @@
                                 </div>
                             ";
             }
-
-
             ?>
-
-        </div>
-   </div>
+    </div>
 </main>
 
 <?php require_once 'javascript.php'; ?>
 </body>
 
 </html>
+
+
+
+    
+

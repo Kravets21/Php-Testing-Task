@@ -1,9 +1,0 @@
-ServerSignature Off
-AddDefaultCharset UTF-8
-
-RewriteEngine On  
-  
-RewriteCond %{SCRIPT_FILENAME} !-d  
-RewriteCond %{SCRIPT_FILENAME} !-f  
-
-RewriteRule ^(.*)$ ./index.php?blocks=$1

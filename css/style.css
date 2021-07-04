@@ -53,3 +53,73 @@ body{
     font-size: 20px;
     text-transform: uppercase;
 }
+
+.films-list{
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.prev_block{
+    margin-right: 90px;
+    margin-bottom: 40px;
+}
+
+.movie-item{
+    margin-top: 30px;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    background: #2b3137;
+}
+
+.admin{
+    margin-top: 30px;
+}
+
+.btn-cntl{
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.add_movie_form.open{
+    display: block;
+}
+
+.delete_movie_form.open{
+    display: block;
+}
+
+.import_movie_form.open{
+    display: block;
+}
+
+.add_movie_form{
+    display: none;
+}
+
+.delete_movie_form{
+    display: none;
+}
+
+.import_movie_form{
+    display: none;
+}
+
+.successBlock{
+    display: none;
+    text-align: center;
+    background-color: darkgreen;
+    height: 40px;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+#errorBlock{
+    display: none;
+    text-align: center;
+    background-color: darkred;
+    height: 40px;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
