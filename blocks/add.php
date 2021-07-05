@@ -56,7 +56,7 @@ if (($title && $year  && $format && $stars)
     &&($title != ' ' && $year != ' ' && $format != ' ' && $stars != ' ')
 ) {
     $starNames = explode(",", $stars); // array of star names
-
+    $starNames = array_unique($starNames); // delete not unique stars
 
 
     $sql = 'INSERT INTO movie (title, year, format) VALUES(?,?,?)'; // add MOVIE
