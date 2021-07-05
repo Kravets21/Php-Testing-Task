@@ -24,6 +24,7 @@
             $query->execute();
             while($row = $query->fetch(PDO::FETCH_OBJ)) {
                 echo "
+                                
                                 <div class='prev_block'>
                                     <div class='prev_info'>
                                     <a href='movie.php?id=$row->id'>
@@ -33,8 +34,10 @@
                                             <li class='prev_li mb-2'><b>Format:</b> $row->format</li>
                                         </ul>
                                     </a>
+                                    <a href='delete.php?id=$row->id' class='btn btn-danger delete_movie_form'>Delete</a>
                                     </div>
                                 </div>
+                        
                             ";
             }
 

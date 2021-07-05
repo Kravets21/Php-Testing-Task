@@ -57,11 +57,19 @@ body{
 .films-list{
     padding: 20px;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .prev_block{
-    margin-right: 90px;
-    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: #0f6674;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .movie-item{
@@ -70,6 +78,7 @@ body{
     text-align: center;
     padding: 30px;
     background: #2b3137;
+    justify-content: space-around;
 }
 
 .admin{
@@ -86,19 +95,11 @@ body{
     display: block;
 }
 
-.delete_movie_form.open{
-    display: block;
-}
-
 .import_movie_form.open{
     display: block;
 }
 
 .add_movie_form{
-    display: none;
-}
-
-.delete_movie_form{
     display: none;
 }
 

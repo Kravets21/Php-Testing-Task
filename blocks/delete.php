@@ -1,21 +1,16 @@
 <?php
 
-$title = $_POST['title'];
+$id = $_GET['id'];
 
-$msg = 'Error. Empty Field';
-
-if ($title) {
-    $msg = 'Done';
-
+if ($id) {
     $user = 'root';
     $pdo = new PDO('mysql:host=localhost;dbname=webbylab;port=3306',$user);
 
-    $sql = 'DELETE FROM `movie` WHERE `title`= :title';
+    $sql = 'DELETE FROM `movie` WHERE `id`= :id';
     $query = $pdo->prepare($sql);
-    $query->execute(['title' => $title]);
+    $query->execute(['id' => $id]);
+
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
-
-
-echo $msg;
 
 ?>

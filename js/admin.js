@@ -6,7 +6,6 @@ function hideOtherAdminForms(form){
         });
 }
 
-hideOtherAdminForms(".delete_movie");
 hideOtherAdminForms(".import_movie");
 hideOtherAdminForms(".add_movie");
 	   
@@ -24,6 +23,17 @@ $.ajax({
     dataType: 'html',
     success: function(data) {
     data = data.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+        var inputs = document.querySelectorAll('input[type=text]');
+        var textarea = document.querySelectorAll('textarea[type=text]');
+
+        for (var i = 0;  i < inputs.length; i++) {
+            inputs[i].value = '';
+        };
+
+        for (var i = 0;  i < textarea.length; i++) {
+            textarea[i].value = '';
+        };
+
 
         if(data == 'Done') {
         $('#successBlock').show();
@@ -42,37 +52,6 @@ $.ajax({
 
         });
 
-});
-
-
-
-$('.delete_movie_form button').click(function () {
-let title = $('#titledel').val();
-$.ajax({
-    url: 'delete.php',
-    type: "POST",
-    cache: false,
-    data: {'title': title},
-    dataType: 'html',
-    success: function(data) {
-    data = data.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-
-        if(data == 'Done') {
-        $('#successBlock').show();
-        $('#successBlock').text(data);
-        $('#errorBlock').hide();
-
-        }
-        else{
-        $('#successBlock').hide();
-        $('#errorBlock').show();
-        $('#errorBlock').text(data);
-        }
-
-
-        }
-
-        });
 });
 
 $('.import_movie_form button').click(function () {
