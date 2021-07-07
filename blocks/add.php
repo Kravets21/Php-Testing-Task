@@ -29,8 +29,6 @@ if (strlen($stars) <=3)
     $error="Incorrect stars field!";
 } elseif (preg_match("/(\d+)/s", $stars)) {
     $error="Incorrect stars field: it contains digits!";
-} elseif (preg_match('[!"#$%&()*+./:;<=>?@[\\\]_`{|}~]*', $stars)) {
-    $error="Incorrect stars field: it contains incorrect symbols!";
 }
 
 if($error!='')

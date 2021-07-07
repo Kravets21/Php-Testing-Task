@@ -124,3 +124,35 @@ body{
     font-size: 20px;
     margin-bottom: 30px;
 }
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.pagination a{
+    min-width: 30px;
+    font-size: inherit;
+    display: inline-block;
+    margin-left: 4px;
+    list-style-type: none;
+    color: #eee;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.pagination a:hover{
+    background: #ff6666;
+    color: white;
+}
+
+.pagination li.active a{
+    background: #ff6666;
+    color: white;
+}
+
+.next{
+    font-weight: 700;
+}

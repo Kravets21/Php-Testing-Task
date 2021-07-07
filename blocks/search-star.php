@@ -24,6 +24,17 @@
 
             $pdo = new PDO('mysql:host=localhost;dbname=webbylab','root');
 
+            $sql = "SELECT COUNT(*) FROM `movie` WHERE `title` LIKE '%$search%'";
+            $query = $pdo->prepare($sql);
+            $query->execute();
+
+            $count = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($count && !array_key_exists('count', $count)) {
+                echo '0 movies were found';
+                exit();
+            }
+
             $sql = "SELECT id FROM `star` WHERE `name` LIKE '%$search%'";
             $query = $pdo->prepare($sql);
             $query->execute();
