@@ -26,19 +26,20 @@ $.ajax({
         var inputs = document.querySelectorAll('input[type=text]');
         var textarea = document.querySelectorAll('textarea[type=text]');
 
-        for (var i = 0;  i < inputs.length; i++) {
-            inputs[i].value = '';
-        };
-
-        for (var i = 0;  i < textarea.length; i++) {
-            textarea[i].value = '';
-        };
-
 
         if(data == 'Done') {
-        $('#successBlock').show();
-        $('#successBlock').text(data);
-        $('#errorBlock').hide();
+
+            for (var i = 0;  i < inputs.length; i++) {
+                inputs[i].value = '';
+            };
+
+            for (var i = 0;  i < textarea.length; i++) {
+                textarea[i].value = '';
+            };
+
+            $('#successBlock').show();
+            $('#successBlock').text(data);
+            $('#errorBlock').hide();
 
         }
         else{

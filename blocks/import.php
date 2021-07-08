@@ -56,6 +56,14 @@ if ($file) {
                 }
 
                 if ($title && $year && $format && $stars) {
+                    $starNames = [];
+
+                    foreach ($stars as $starName) {
+                        $starNames[] = ltrim($starName);
+                    }
+
+                    $starNames = array_unique($starNames); // delete not unique stars
+
                     $pdo = new PDO('mysql:host=localhost;dbname=webbylab;port=3306','root');
 
                     $sql = 'SELECT id FROM `movie` WHERE title = :title';
@@ -85,7 +93,7 @@ if ($file) {
                         break;
                     }
 
-                    foreach ($stars as $starName) { // VERY bad choice to do query in a loop BUT i was in a hurry :(
+                    foreach ($starNames as $starName) { // VERY bad choice to do query in a loop BUT i was in a hurry :(
                         $sql = 'INSERT INTO star (name) VALUES(?)'; // add star
 
                         $query = $pdo->prepare($sql);

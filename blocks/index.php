@@ -40,7 +40,7 @@
            $page_numbers = ceil($count['count']/ $items_on_page); // сколько у нас будет страничек для пагинации
            $prev = $page-1;
            $next = $page+1;
-           if($page != 1)
+           if($page != 1 && $page_numbers)
            {
                echo "<li class=\"disabled next\"><a href=\"index.php?page=$prev\"> < </a></li>";
            }
@@ -56,7 +56,7 @@
                }
                echo "<li$class><a href=\"index.php?page=$i\">$i</a></li>";
            }
-           if($page != $page_numbers)
+           if($page != $page_numbers && $page_numbers)
            {
                echo "<li class=\"disabled next\"><a href=\"index.php?page=$next\"> > </a></li>";
            }
@@ -65,8 +65,7 @@
 
         <div class="row films-list">
             <?php
-
-            $sql = "SELECT * FROM `movie` ORDER BY LOWER(title) REGEXP '^[А-яа-я]' DESC, LOWER(title) REGEXP '^[A-za-z]' DESC, LOWER(title) LIMIT $from, $items_on_page";
+            $sql = "SELECT * FROM `movie` ORDER BY LOWER(title) COLLATE 'utf8_unicode_ci' LIMIT $from, $items_on_page";
             $query = $pdo->prepare($sql);
             $query->execute();
             while($row = $query->fetch(PDO::FETCH_OBJ)) {
@@ -81,7 +80,27 @@
                                             <li class='prev_li mb-2'><b>Format:</b> $row->format</li>
                                         </ul>
                                     </a>
-                                    <a href='delete.php?id=$row->id' class='btn btn-danger delete_movie_form'>Delete</a>
+                                    <a class='btn btn-danger delete_movie_form' type='button' data-toggle='modal' data-target='#deleteModal'>Delete</a>
+                                    </div>
+                                </div>
+                                
+                                <div class='modal fade' id='deleteModal' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel' aria-hidden='true'>
+                                    <div class='modal-dialog' role='document'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h5 class='modal-title' id='deleteModalLabel'>Delete</h5>
+                                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                    <span aria-hidden='true'>&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                Are you sure you want to delete this movie?
+                                            </div>
+                                            <div class='modal-footer'>
+                                                <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                                <a href='delete.php?id=$row->id' class='btn btn-primary'>Delete</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                         
@@ -90,12 +109,16 @@
 
 
             ?>
-
         </div>
    </div>
 </main>
 
 <?php require_once 'javascript.php'; ?>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

@@ -156,3 +156,8 @@ body{
 .next{
     font-weight: 700;
 }
+
+.modal-content{
+    background-color: #0f6674;
+    color: white;
+}
